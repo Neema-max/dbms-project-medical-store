@@ -1,0 +1,329 @@
+@import url("https://fonts.googleapis.com/css2?family=Signika&display=swap");
+@import url("https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css");
+.container1 {
+    max-width: 100vw !important;
+    padding-top: 10px !important;
+    margin: 0 !important;
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.container1 .product-card {
+    height: auto;
+    width: 275px;
+    background-color: white;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.container1 .product-card .product-name h4 {
+    font-weight: bold;
+}
+
+.container1 .product-card .product-image {
+    position: relative;
+    height: auto;
+}
+
+.container1 .product-card .product-image .out-of-order {
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.788);
+    border: 1px solid rgba(97, 97, 97, 0.432);
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: rgba(97, 97, 97, 0.432);
+}
+
+.container1 .product-card .product-image .tag-discount {
+    position: absolute;
+    width: 50px;
+    text-align: center;
+    background-color: green;
+    color: #fff;
+    top: 7%;
+    right: 0;
+    transition: all 650ms ease;
+}
+
+.container1 .product-card .product-image .tag-discount:hover {
+    width: 100%;
+    border-radius: 0;
+}
+
+.container1 .product-card .product-image .ribbon {
+    position: absolute;
+    display: inline-block;
+    top: 0.3em;
+    right: 0.8em;
+    max-width: 5em;
+    color: #fff;
+    z-index: 1;
+}
+
+.container1 .product-card .product-image .ribbon span {
+    position: absolute;
+    top: 10px;
+    right: -3px;
+    transform: rotatez(45deg);
+    color: white;
+    font-weight: bold;
+}
+
+.container1 .product-card .product-image .ribbon::after {
+    position: absolute;
+    top: -1.5em;
+    right: -6em;
+    content: "";
+    height: 5em;
+    width: 10em;
+    transform: rotatez(45deg);
+    background-color: #da0037;
+    z-index: -1;
+}
+
+.container1 .product-card .product-image img {
+    width: 100%;
+    transition: all 650ms ease;
+}
+
+.container1 .product-card .product-image img:hover {
+    transform: scale(1.2);
+}
+
+.container1 .product-card .product-detail {
+    width: 100%;
+    position: relative;
+    background-color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    z-index: 1;
+}
+
+.container1 .product-card .product-detail .product-price-tag {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+.container1 .product-card .product-detail .product-price-tag .product-price .discounted {
+    text-decoration: line-through 2px solid #666666;
+    padding: 0;
+    margin: 0;
+}
+
+.container1 .product-card .product-detail .product-price-tag .product-price .discounted-price {
+    padding: 0;
+    margin: 0;
+    font-size: 18px;
+    text-align: center;
+    font-weight: bold;
+    transform: translateY(-3px);
+}
+
+.container1 .product-card .product-detail .product-size-color {
+    align-items: flex-end;
+}
+
+.container1 .product-card .product-detail .product-size-color h5 {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.container1 .product-card .product-detail .product-size-color .product-colors .colors {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.container1 .product-card .product-detail .product-size-color .product-colors .colors .color-round {
+    width: 20px;
+    height: 20px;
+    transition: all 650ms ease;
+}
+
+.container1 .product-card .product-detail .product-size-color .product-colors .colors .color-round:hover {
+    border: solid 1px #727272;
+    padding: 2px;
+    background-clip: content-box;
+    transform: scale(1.3);
+    cursor: pointer;
+}
+
+.container1 .product-card .product-detail .product-size-color .product-colors .colors .color-red {
+    background-color: #611223;
+}
+
+.container1 .product-card .product-detail .product-size-color .product-colors .colors .color-blue {
+    background-color: #313b95;
+}
+
+.container1 .product-card .product-detail .product-size-color .product-colors .colors .color-black {
+    background-color: #303030;
+}
+
+.container1 .product-card .product-detail .product-size-color .product-colors .colors .color-orange {
+    background-color: #c85625;
+}
+
+.container1 .product-card .product-detail .product-size-color .product-colors .colors .active {
+    width: 25px;
+    height: 25px;
+    border: 1px solid black;
+}
+
+.container1 .product-card .product-detail .product-size-color .product-colors .colors .disable {
+    cursor: not-allowed !important;
+}
+
+.container1 .product-card .product-detail .product-size-color .product-size .text {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.container1 .product-card .product-detail .product-size-color .product-size .text p {
+    position: relative;
+    font-size: 10px;
+    transform: translateY(5px);
+    cursor: pointer;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.container1 .product-card .product-detail .product-size-color .product-size .text p::before {
+    content: "";
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    background-color: grey;
+    bottom: 0;
+    left: -100%;
+    z-index: -1;
+    transition: all 650ms ease;
+}
+
+.container1 .product-card .product-detail .product-size-color .product-size .text p:hover::before {
+    left: 0%;
+}
+
+.container1 .product-card .product-detail .product-size-color .product-size .sizes {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.container1 .product-card .product-detail .product-size-color .product-size .sizes .size-square {
+    height: 20px;
+    width: 20px;
+    border: 1px solid grey;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 650ms ease;
+}
+
+.container1 .product-card .product-detail .product-size-color .product-size .sizes .size-square span {
+    font-size: 13px;
+    color: gray;
+    transition: all 650ms ease;
+}
+
+.container1 .product-card .product-detail .product-size-color .product-size .sizes .size-square:hover {
+    border: 1px solid black;
+    cursor: pointer;
+    background-color: grey;
+}
+
+.container1 .product-card .product-detail .product-size-color .product-size .sizes .size-square:hover span {
+    color: black;
+}
+
+.container1 .product-card .product-detail .product-size-color .product-size .sizes .disable {
+    cursor: not-allowed !important;
+    text-decoration: line-through;
+}
+
+.container1 .product-card .product-detail .product-size-color .product-size .sizes .disable:hover {
+    border: 1px solid grey;
+    background-color: white;
+}
+
+.container1 .product-card .product-detail .cta {
+    width: 110%;
+    position: relative;
+    bottom: 0;
+}
+
+.container1 .product-card .product-detail .cta .btn {
+    width: 45px;
+    width: 51% !important;
+    left: -1%;
+    border-radius: 0px;
+    transition: all 650ms ease;
+}
+
+.container1 .product-card .product-detail .cta .btn-cart {
+    opacity: 0.6;
+    position: absolute;
+}
+
+.container1 .product-card .product-detail .cta .btn-cart:hover {
+    width: 100% !important;
+}
+
+.container1 .product-card .product-detail .cta .btn-cart:hover~.btn-buy {
+    left: 100%;
+}
+
+.container1 .product-card .product-detail .cta .btn-buy {
+    position: absolute;
+    left: 50%;
+}
+
+.container1 .product-card .product-detail .cta .btn-buy:hover {
+    width: 100% !important;
+    left: 0%;
+}
+
+.container1 .product-card .product-detail .cta .btn-buy:hover~.btn-cart {
+    left: -50%;
+    background-color: red;
+}
+
+.container1 .product-card .product-detail .cta .btn-wish-list {
+    opacity: 0.75;
+    width: 100% !important;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+input:focus {
+    outline: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.btn {
+    box-shadow: none;
+}
+
+.btn:hover,
+.btn:active,
+.btn:focus {
+    box-shadow: none;
+}

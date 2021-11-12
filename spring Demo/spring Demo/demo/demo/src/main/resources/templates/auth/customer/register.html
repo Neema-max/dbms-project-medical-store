@@ -1,0 +1,60 @@
+<div th:fragment="registerCust" th:id="regcustComp" style="width: 500px;margin-left: 300px;margin-top: 75px;">
+    <link rel="stylesheet" href="style/registerCust.css">
+
+    <!--h1>Register customer</h1>
+    <form id="registerCust" enctype="multipart/form-data">
+        <input type="text" name="uname" id="unameRegCust" placeholder="uname" required />
+        <input type="password" name="password" id="passRegCust" placeholder="password" required/>
+        <input type="email" name="email" id="emailRegCust" placeholder="email" required/>
+        <input  id="nameRegCust" placeholder="name" required />
+        <input type="tel" name="phone" id="phoneRegCust" pattern="[0-9]{10}" placeholder="phone number" required/>
+        <input type="date" name="dob" id="dobRegCust" placeholder="dob" required/>
+        <input type="text" name="address" id="addressRegCust" placeholder="address" />
+        <input type="file" name="image" accept="image/png, image/jpeg" />
+        <input type="submit">
+    </form>
+    <button id="loginBtn">login</button>
+    <p class="errRegCust"></p-->
+
+    <form id="registerCust" enctype="multipart/form-data" style="margin: 40px;" autocomplete="off">
+        <div class="form-group">
+            <label>username*</label>
+            <input type="text" name="uname" class="form-control" placeholder="username" required>
+        </div>
+        <div class="form-group">
+            <label>Password*</label>
+            <input type="password" name="password" class="form-control" placeholder="password" required>
+        </div>
+        <div class="form-group">
+            <label>Email*</label>
+            <input type="email" name="email" class="form-control" placeholder="abcd@xyz.pqr" required>
+        </div>
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" name="name" class="form-control" placeholder="Name">
+        </div>
+        <div class="form-group">
+            <label>phone</label>
+            <input type="tel" name="phone" class="form-control" pattern="[0-9]{10}" placeholder="phone number">
+        </div>
+        <div class="form-group">
+            <label>Date of birth*</label>
+            <input type="date" name="dob" class="form-control" placeholder="dob" required>
+        </div>
+        <div class="form-group">
+            <label>Address*</label>
+            <input class="form-control" type="text" name="address" id="addressRegCust" placeholder="address" required>
+        </div>
+        <div class="form-group">
+            <label>Profile picture</label>
+            <input class="form-control" type="file" name="image" accept="image/png, image/jpeg">
+        </div>
+        <p class="errRegCust"></p> <input type="submit" class="btn btn-info" style="margin-left: 140px;width: 120px;">
+        <p class="text text-center">
+            Already have an account?
+            <a type="button" class="text link" id="loginBtn">Login</a>
+        </p>
+    </form>
+
+    <script src="js/auth/customer/register.js "></script>
+</div>

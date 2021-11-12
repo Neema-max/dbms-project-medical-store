@@ -1,0 +1,41 @@
+<div th:fragment="item">
+    <form id="addingItemForm">
+        <div class="form-group">
+            <label>Name</label>
+            <input class="form-control" type="text" name="itemName" id="itemName" placeholder="item name">
+        </div>
+        <div class="form-group">
+            <label>Description</label>
+            <input class="form-control" type="text" name="itemDescription" id="itemDesc" placeholder="item description">
+        </div>
+        <div class="form-group">
+            <label>selling price</label>
+            <input class="form-control" type="number" name="sellingPrice" id="sellingPrice" placeholder="selling price" style="width: 50%;">
+        </div>
+        <div class="form-group">
+            <label>cost price</label>
+            <input class="form-control" type="number" name="buyingPrice" id="buyingPrice" placeholder="cost price" style="width: 50%;">
+        </div>
+        <div class="form-group">
+            <label>quantity</label>
+            <input class="form-control" type="number" name="quantity" id="qunatity" placeholder="quantity" style="width: 50%;">
+        </div>
+        <div class="form-group">
+            <label>category</label>
+            <select id="categoryId" name="categoryId">
+                <p th:each="category : ${categories}">
+                    <option th:value="${category.catId}" th:text="${category.category}"></option>
+                </p>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Item images</label>
+            <input class="form-control" type="file" name="image" accept="image/png, image/jpeg" style="width: 50%;" multiple/>
+        </div>
+        <div class="d-flex justify-content-center">
+            <input type="submit" class="btn btn-primary">
+            <p id="errAddItem"></p>
+        </div>
+    </form>
+    <script src="js/auth/admin/components/add/item.js"></script>
+</div>

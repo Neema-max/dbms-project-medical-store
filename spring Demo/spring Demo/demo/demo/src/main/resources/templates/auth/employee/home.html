@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="components/head :: heaad">
+</head>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+<body id="body-pd">
+    <div th:replace="components/navbar :: navbar(is='employee')"></div>
+    <div class="bg-light" style="padding: 10px;">
+        <div th:replace="components/dashboard :: dashboard"></div>
+        <div th:if="${catrgoryItemShow != null}" th:replace="components/dashItemShow :: dashItemShow"></div>
+        <div th:replace="components/search :: search"></div>
+        <div th:replace="components/items :: items"></div>
+        <div th:replace="auth/employee/profile :: profile"></div>
+        <div th:replace="auth/admin/components/accounts :: accounts"></div>
+        <div th:replace="auth/admin/components/showAll :: showAll(is='employee')"></div>
+    </div>
+    <script>
+        $(function() {
+            $('[data-toggle=" tooltip "]').tooltip()
+        })
+    </script>
+    <script src="js/components/dashboard.js "></script>
+    <script src="js/components/navbar.js "></script>
+    <script src="js/auth/admin/home.js "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js " integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q " crossorigin="anonymous "></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js " integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl " crossorigin="anonymous "></script>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<div th:fragment="item(itemx)">
+    <form th:id="'editItemForm'+${itemx.item.itemId}" method="post" th:action="'/editItem/'+${itemx.item.itemId}">
+
+        <div class="form-group">
+            <label>item name</label>
+            <input class="form-control" type="text" name="itemName" id="itemName" th:value="${itemx.item.itemName}" placeholder="item name"></div>
+        <div class="form-group">
+            <label>description</label>
+            <input class="form-control" type="text" name="itemDescription" id="itemDesc" th:value="${itemx.item.itemDescription}" placeholder="item description"></div>
+        <div class="form-group">
+            <label>selling price</label>
+            <input class="form-control" style="width: 50%;" type="number" name="sellingPrice" id="sellingPrice" th:value="${itemx.item.sellingPrice}" placeholder="selling price"></div>
+        <div class="form-group">
+            <label>cost price</label>
+            <input class="form-control" style="width: 50%;" type="number" name="buyingPrice" id="buyingPrice" th:value="${itemx.item.buyingPrice}" placeholder="cost price"></div>
+        <div class="form-group">
+            <label>quantity</label>
+            <input class="form-control" style="width: 50%;" type="number" name="quantity" id="qunatity" th:value="${itemx.item.quantity}" placeholder="quantity"></div>
+        <div class="form-group">
+            <label>category</label>
+            <select id="categoryId" name="categoryId">
+                <p th:each="category : ${categories}">
+                    <span th:if="${itemx.item.categoryId == category.catId}">
+                        <option  selected="selected" th:value="${category.catId}" th:text="${category.category}">
+
+                        </option>
+                    </span>
+                    <span th:if="${itemx.item.categoryId != category.catId}">
+                        <option  th:value="${category.catId}" th:text="${category.category}">
+
+                        </option>
+                    </span>
+                </p>
+            </select>
+        </div>
+        <input type="submit" class="btn btn-primary">
+    </form>
+</div>

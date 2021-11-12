@@ -1,0 +1,185 @@
+<div th:fragment="items" id="itemsComp">
+    <link rel="stylesheet" href="style/items.css">
+    <div class="row">
+        <div th:id="'items'+${itemshow.item.itemId}" class="carousel slide col-6 col-md-4" data-ride="carousel" style="width: 450px;margin:30px;">
+            <div class="carousel-inner">
+                <div class="carousel-item active" th:if="${itemshow.itemImage.size >= 1}">
+                    <img class="d-block w-100" th:src="@{${itemshow.itemImage[0].getImagePath()}}" alt="First slide">
+                </div>
+                <div class="carousel-item" th:if="${itemshow.itemImage.size > 1}" th:each="i: ${#numbers.sequence(1, itemshow.itemImage.size - 1)}">
+                    <img class="d-block w-100 " th:src="@{${itemshow.itemImage[i].getImagePath()}} " alt="First slide ">
+                </div>
+            </div>
+            <a class="carousel-control-prev" th:href="'#'+'items'+${itemshow.item.itemId}" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" th:href="'#'+'items'+${itemshow.item.itemId}" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+        <div class="col-6 col-md-4" style="margin: 30px;">
+            <h2 th:text="${itemshow.item.itemName}" style="margin-bottom: 20px;"></h2>
+            <div class="reviews" style="margin-bottom: 13px;" th:with=" avg =${#aggregates.avg(itemshow.reviewShow.![review.rating])}">
+                <i th:if="${avg >0.5}" class="fas fa-star"></i>
+                <i th:if="${avg <= 0}" class="far fa-star"></i>
+                <i th:if="${avg > 0 && avg <= 0.5}" class="fas fa-star-half-alt"></i>
+
+                <i th:if="${ avg > 1.5}" class="fas fa-star"></i>
+                <i th:if="${avg <= 1}" class="far fa-star"></i>
+                <i th:if="${avg > 1 && avg <=1.5}" class="fas fa-star-half-alt"></i>
+
+                <i th:if="${ avg > 2.5}" class="fas fa-star"></i>
+                <i th:if="${avg <= 2}" class="far fa-star"></i>
+                <i th:if="${avg > 2 && avg <= 2.5}" class="fas fa-star-half-alt"></i>
+
+                <i th:if="${avg > 3.5}" class="fas fa-star"></i>
+                <i th:if="${avg <= 3}" class="far fa-star"></i>
+                <i th:if="${avg > 3 && avg <=3.5}" class="fas fa-star-half-alt"></i>
+
+                <i th:if="${avg > 4.5}" class="fas fa-star"></i>
+                <i th:if="${avg <= 4}" class="far fa-star"></i>
+                <i th:if="${avg >4 && avg <=4.5 }" class="fas fa-star-half-alt"></i>
+
+                <i style="color: black;" th:text="'('+${#lists.size(itemshow.reviewShow)} +' reviews)'"></i>
+            </div>
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td><b>Category</b>
+                            <p th:text="${itemshow.category}"></p>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td><b>Description</b>
+                            <p th:text="${itemshow.item.itemDescription}"></p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="row" style="margin-top:20px;">
+                <div class="col-6 col-md-4">
+                    <h3 th:text="₹+${itemshow.item.sellingPrice}"></h3>
+                </div>
+                <div th:if="${itemshow.item.quantity >0}" class="col-6 col-md-4" style="margin-left:10px;">
+                    <div class="row">
+                        <div class="col-6 col-md-4"><button class="btn" style="background-color: white;" th:attr="onclick=|decrease(${itemshow.item.itemId}+'quantityitems')|">-</button></div>
+                        <input type="number" value="1" min="1" th:max="${itemshow.item.quantity}" name="quantity" th:id="${itemshow.item.itemId}+quantityitems" style="border: none;width: 40px;text-align: center;">
+                        <div class="col-6 col-md-4" style="background-color: white;"><button class="btn" style="background-color: white;" th:attr="onclick=|increase(${itemshow.item.itemId}+'quantityitems')|">+</button></div>
+                    </div>
+                </div>
+                <div th:if="${itemshow.item.quantity >0}" class="col-6 col-md-4" style="margin-top: 20px;">
+                    <button th:attr="onclick=|addToCart(${itemshow.item.itemId}, 'items')|" class="btn btn-success">Add to cart</button>
+                </div>
+                <div th:if="${itemshow.item.quantity <=0 }">
+                    <div class="alert alert-secondary" role="alert">
+                        sorry!! item is currently out of stock
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <section id="testimonials">
+        <!--heading--->
+        <div class="testimonial-heading">
+            <span>Comments</span>
+            <h4>Clients Says</h4>
+        </div>
+
+        <!--testimonials-box-container------>
+        <div class="testimonial-box-container">
+            <!--BOX-1-------------->
+            <div th:each="k : ${itemshow.reviewShow}" class="testimonial-box">
+                <!--top------------------------->
+                <div class="box-top">
+                    <div class="profile">
+                        <div class="profile-img">
+                            <img th:src="@{${k.cust.getImagePath()}}" />
+                        </div>
+                        <div class="name-user">
+                            <strong th:text="${k.cust.name}">Liam mendes</strong>
+                            <span th:text="${'@'+k.cust.username}">@liammendes</span>
+                        </div>
+                    </div>
+                    <div class="reviews">
+                        <i th:if="${k.review.rating >= 1}" class="fas fa-star"></i>
+                        <i th:if="${k.review.rating == 0}" class="far fa-star"></i>
+                        <i th:if="${k.review.rating == 0.5}" class="fas fa-star-half-alt"></i>
+                        <i th:if="${k.review.rating >= 2}" class="fas fa-star"></i>
+                        <i th:if="${k.review.rating <= 1}" class="far fa-star"></i>
+                        <i th:if="${k.review.rating == 1.5}" class="fas fa-star-half-alt"></i>
+                        <i th:if="${k.review.rating >= 3}" class="fas fa-star"></i>
+                        <i th:if="${k.review.rating <= 2}" class="far fa-star"></i>
+                        <i th:if="${k.review.rating == 2.5}" class="fas fa-star-half-alt"></i>
+                        <i th:if="${k.review.rating >= 4}" class="fas fa-star"></i>
+                        <i th:if="${k.review.rating <= 3}" class="far fa-star"></i>
+                        <i th:if="${k.review.rating == 3.5}" class="fas fa-star-half-alt"></i>
+                        <i th:if="${k.review.rating >= 5}" class="fas fa-star"></i>
+                        <i th:if="${k.review.rating <= 4}" class="far fa-star"></i>
+                        <i th:if="${k.review.rating == 4.5}" class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+                <div class="client-comment">
+                    <p th:text="${k.review.reviewDescription}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, quaerat quis? Provident temporibus architecto asperiores nobis maiores nisi a. Quae doloribus ipsum aliquam tenetur voluptates incidunt blanditiis sed atque cumque.</p>
+                </div>
+            </div>
+            <!--BOX-2-------------->
+            <!--BOX-1-------------->
+            <div th:if="${session.userId != null}" class="testimonial-box">
+                <!--top------------------------->
+                <div class="box-top">
+                    <div class="profile">
+                        <div class="profile-img">
+                            <img th:src="@{${user.getImagePath()}}" />
+                        </div>
+                        <div class="name-user">
+                            <strong th:text="${user.name}">Liam mendes</strong>
+                            <span th:text="${'@'+user.username}">@liammendes</span>
+                        </div>
+                    </div>
+                    <div class="reviews">
+                        <form th:id="finalrating+${itemshow.item.itemId}">
+                            <fieldset class="rating" id="finalrating">
+                                <input type="radio" id="star5" name="rating" value="5" />
+                                <label class="full" for="star5" title="Awesome - 5 stars"></label>
+                                <input type="radio" id="star4half" name="rating" value="4.5" />
+                                <label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+                                <input type="radio" id="star4" name="rating" value="4" />
+                                <label class="full" for="star4" title="Pretty good - 4 stars"></label>
+                                <input type="radio" id="star3half" name="rating" value="3.5" />
+                                <label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+                                <input type="radio" id="star3" name="rating" value="3" />
+                                <label class="full" for="star3" title="Meh - 3 stars"></label>
+                                <input type="radio" id="star2half" name="rating" value="2.5" />
+                                <label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+                                <input type="radio" id="star2" name="rating" value="2" />
+                                <label class="full" for="star2" title="Kinda bad - 2 stars"></label>
+                                <input type="radio" id="star1half" name="rating" value="1.5" />
+                                <label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+                                <input type="radio" id="star1" name="rating" value="1" />
+                                <label class="full" for="star1" title="Sucks big time - 1 star"></label>
+                                <input type="radio" id="starhalf" name="rating" value="0.5" />
+                                <label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+                                <input type="radio" class="reset-option" name="rating" value="reset" />
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+                <div class="client-comment">
+                    <textarea th:id="reviewDesc+${itemshow.item.itemId}" type="text" placeholder="write your opinion !!"></textarea>
+                </div>
+                <button type="button" class="btn-sm btn-dark mt-2" th:attr="onClick=|submitReview(${itemshow.item.itemId})|">submit</button>
+            </div>
+
+
+
+
+        </div>
+    </section>
+
+    <script src="js/items.js"></script>
+</div>

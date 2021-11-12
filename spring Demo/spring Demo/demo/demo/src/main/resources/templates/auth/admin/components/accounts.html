@@ -1,0 +1,177 @@
+<div th:fragment="accounts" id="accountsComp" style="margin-top: 50px;">
+    <script src='https://cdn.plot.ly/plotly-2.4.2.min.js'></script>
+    <div>
+        <div style="margin-left: 20px;">
+            <h3 class="display-4">All time sales chart </h3>
+        </div>
+
+        <div id='alltimesales'>
+            <!-- Plotly chart will be drawn inside this DIV -->
+        </div>
+        <div style="margin-left: 20px;">
+            <h3 class="display-4">sales chart via category</h3>
+        </div>
+        <div id="cateogrySalesChart">
+
+        </div>
+    </div>
+    <script th:inline="javascript">
+        var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+        ];
+
+        function randomcolor() {
+            return "#" + Math.floor(Math.random() * 16777215).toString(16);
+        }
+
+        function dateFormat(d) {
+            var t = new Date(d);
+            return t.getDate() + '-' + monthNames[t.getMonth()] + '-' + t.getFullYear();
+        }
+        var allOrders = /*[[${allOrders}]]*/ "";
+        console.log(allOrders);
+        var x = [];
+        var x1 = [];
+        var y = [];
+        for (var i = 0; i < allOrders.length; i++) {
+            if (allOrders[i].order.orderStatus != -1) {
+                x.push(dateFormat(allOrders[i].order.orderDate).toString());
+                y.push((allOrders[i].order.subtotal - 80).toString());
+                var prof = 0;
+                for (var j = 0; j < allOrders[i].orderItems.length; j++) {
+                    prof += (allOrders[i].orderItems[j].price - allOrders[i].orderItems[j].item.buyingPrice) * allOrders[i].orderItems[j].units;
+                }
+                x1.push(prof);
+            }
+        }
+        console.log(x);
+        console.log(y);
+        var salsetrace = {
+            x: x,
+            y: y,
+            autobinx: false,
+            histfunc: "sum",
+            marker: {
+                color: "rgba(100, 200, 102, 0.7)",
+                line: {
+                    color: "rgba(100, 200, 102, 1)",
+                    width: 1
+                }
+            },
+            name: "sales",
+            opacity: 0.75,
+            type: "histogram",
+            xbins: {
+                end: 4,
+                size: 0.06,
+                start: -3.2
+
+            }
+        };
+        var profittrace = {
+            x: x,
+            y: x1,
+            autobinx: false,
+            histfunc: "sum",
+            marker: {
+                color: "rgba(255, 100, 102, 0.7)",
+                line: {
+                    color: "rgba(255, 100, 102, 1)",
+                    width: 1
+                }
+            },
+            name: "profit",
+            opacity: 0.75,
+            type: "histogram",
+            xbins: {
+                end: 4,
+                size: 0.06,
+                start: -3.2
+
+            }
+        };
+        var data = [salsetrace, profittrace];
+        var layout = {
+            bargap: 0.05,
+            bargroupgap: 0.2,
+            barmode: "overlay",
+            title: "Sales Results",
+            xaxis: {
+                title: "Value"
+            },
+            yaxis: {
+                title: "Count"
+            }
+        };
+
+        Plotly.newPlot('alltimesales', data, layout);
+        var data1 = [];
+        var dic = {}; // date : {
+        //    cat1: [sum],
+        //    cat2: [sum]
+        //};
+        var dic1 = {}; // categoru : [profit];
+        var dic2 = {};
+        for (var i = 0; i < allOrders.length; i++) {
+            if (allOrders[i].order.orderStatus != -1) {
+                if (dic[dateFormat(allOrders[i].order.orderDate).toString()] == undefined) {
+                    dic[dateFormat(allOrders[i].order.orderDate).toString()] = {};
+                    dic1[dateFormat(allOrders[i].order.orderDate).toString()] = {};
+                }
+                for (var j = 0; j < allOrders[i].orderItems.length; j++) {
+                    var xx = allOrders[i].orderItems[j];
+                    if (dic[dateFormat(allOrders[i].order.orderDate).toString()][allOrders[i].orderItems[j].category] == undefined) {
+                        dic[dateFormat(allOrders[i].order.orderDate).toString()][allOrders[i].orderItems[j].category] = [];
+                        dic1[dateFormat(allOrders[i].order.orderDate).toString()][allOrders[i].orderItems[j].category] = [];
+                    }
+                    dic[dateFormat(allOrders[i].order.orderDate).toString()][allOrders[i].orderItems[j].category].push(allOrders[i].orderItems[j].units * allOrders[i].orderItems[j].price);
+                    dic1[dateFormat(allOrders[i].order.orderDate).toString()][allOrders[i].orderItems[j].category].push(allOrders[i].orderItems[j].units * (allOrders[i].orderItems[j].price - allOrders[i].orderItems[j].item.buyingPrice));
+                }
+            }
+        }
+        console.log(dic);
+        console.log(dic1);
+        var dic3 = {};
+        for (var key in dic) {
+            var date = key;
+            for (var key1 in dic[key]) {
+                if (dic2[key1] == undefined) {
+                    dic2[key1] = [];
+                    dic3[key1] = [];
+                }
+                for (var i = 0; i < dic[key][key1].length; i++) {
+                    dic2[key1].push(date);
+                    dic3[key1].push(dic[key][key1][i]);
+                }
+            }
+        }
+        for (var key in dic2) {
+            var trace = {
+                x: dic2[key],
+                y: dic3[key],
+                autobinx: false,
+                histfunc: "sum",
+                marker: {
+                    color: randomcolor(),
+                    line: {
+                        color: "white",
+                        width: 1
+                    }
+                },
+                name: key.toString(),
+                opacity: 0.75,
+                type: "histogram",
+                xbins: {
+                    end: 4,
+                    size: 0.06,
+                    start: -3.2
+
+                }
+            };
+            data1.push(trace);
+        }
+        console.log(dic2);
+        console.log(dic3);
+        Plotly.newPlot('cateogrySalesChart', data1);
+    </script>
+</div>

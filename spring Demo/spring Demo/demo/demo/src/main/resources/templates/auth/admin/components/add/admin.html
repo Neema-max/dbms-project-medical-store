@@ -1,0 +1,18 @@
+<div th:fragment="admin">
+    <h1>
+        Add Admin
+    </h1>
+    <form id="addAdmin" enctype="multipart/form-data">
+        <input type="text" name="uname" id="unameAddAdmin" placeholder="uname" required />
+        <input type="password" name="password" id="passAddAdmin" placeholder="password" required/>
+        <input type="email" name="email" id="emailAddAdmin" placeholder="email" required/>
+        <input type="text" name="name" id="nameAddAdmin" placeholder="name" required />
+        <input type="tel" name="phone" id="phoneAddAdmin" pattern="[0-9]{10}" placeholder="phone number" required/>
+        <input type="date" name="dob" id="dobAddAdmin" placeholder="dob" required/>
+        <input type="text" name="address" id="addressAddAdmin" placeholder="address" />
+        <input type="file" name="image" accept="image/png, image/jpeg" />
+        <input type="submit">
+    </form>
+    <p id="errorAddAdmin"></p>
+    <script src="js/auth/admin/components/add/admin.js"></script>
+</div>

@@ -1,0 +1,405 @@
+<div th:fragment="showAll(is)">
+    <style>
+        .results tr[visible='false'],
+        .no-result {
+            display: none;
+        }
+        
+        .results tr[visible='true'] {
+            display: table-row;
+        }
+        
+        .results1 tr[visible='false'],
+        .no-result1 {
+            display: none;
+        }
+        
+        .results1 tr[visible='true'] {
+            display: table-row;
+        }
+        
+        .results2 tr[visible='false'],
+        .no-result2 {
+            display: none;
+        }
+        
+        .results2 tr[visible='true'] {
+            display: table-row;
+        }
+        
+        .results3 tr[visible='false'],
+        .no-result3 {
+            display: none;
+        }
+        
+        .results3 tr[visible='true'] {
+            display: table-row;
+        }
+        
+        .results4 tr[visible='false'],
+        .no-result4 {
+            display: none;
+        }
+        
+        .results4 tr[visible='true'] {
+            display: table-row;
+        }
+        
+        .counter {
+            padding: 8px;
+            color: #ccc;
+        }
+    </style>
+    <div id="catManageComp" style="margin-top: 40px;">
+        <div class="row">
+            <div class="form-group pull-right col" style="margin-left: 20px;">
+                <input type="text" class="search form-control" placeholder="What are you looking for? ">
+            </div>
+            <div class="col">
+                <center><button type="button" class="btn btn-success" data-toggle="modal" data-target="#addCatModal">Add more categories</button></center>
+            </div>
+        </div>
+        <table class="table table-bordered results" id="categoryTable" style="width: 600px; margin: 20px; ">
+            <thead>
+                <tr>
+                    <th scope="col ">#</th>
+                    <th scope="col ">categoryId</th>
+                    <th scope="col ">category</th>
+                    <th scope="col ">image</th>
+                    <th scope="col"></th>
+                    <th scope="col " th:if="${is == 'admin'}"></th>
+                </tr>
+                <tr class="warning no-result">
+                    <td colspan="6"><i class="fa fa-warning"></i> No result</td>
+                </tr>
+            </thead>
+            <tbody th:each="cat , i :${categories} ">
+                <tr>
+                    <th scope="row " th:text="${i.index +1} "></th>
+                    <td th:text="${cat.catId} "></td>
+                    <td th:text="${cat.category} ">Otto</td>
+                    <td> <img class="img-thumbnail " width="75px " th:src="@{${cat.getImagePath()}} " /></td>
+                    <td><span class="material-icons-outlined" type="button" data-toggle="modal" th:attr="data-target='#'+${cat.catId}+'EditModal'">edit</span></td>
+                    <td th:if="${is == 'admin'}"><span class="material-icons-outlined" th:attr="onclick=|removeCat(${cat.catId})| ">delete</span></td>
+                </tr>
+                <div class="modal fade" th:id="${cat.catId} + 'EditModal'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">category update</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                            <div class="modal-body">
+                                <div th:replace="auth/admin/components/update/category :: category(cat = ${cat})"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </tbody>
+        </table>
+        <div class="modal fade" id="addCatModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add new category</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                    </div>
+                    <div class="modal-body">
+                        <div th:replace="auth/admin/components/add/category :: category"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="itemManageComp" style="margin-top: 50px;">
+        <div class="row">
+            <div class="form-group pull-right col" style="margin-left: 20px;">
+                <input type=" text " class="search1 form-control" placeholder="What are you looking for? ">
+            </div>
+            <div class="col">
+                <center><button type="button" class="btn btn-success" data-toggle="modal" data-target="#addItemModal">Add item</button></center>
+            </div>
+        </div>
+        <table class="table table-bordered results1" id="itemTable" style="width: 90%; margin: 20px; ">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">itemId</th>
+                    <th scope="col">item name</th>
+                    <th scope="col">item description</th>
+                    <th scope="col">cost price</th>
+                    <th scope="col">selling price</th>
+                    <th scope="col">categoryId</th>
+                    <th scope="col">quantity</th>
+                    <th scope="col">image</th>
+                    <th scope="col"></th>
+                    <th scope="col" th:if="${is == 'admin'}"></th>
+                </tr>
+                <tr class="warning no-result1">
+                    <td colspan="6 "><i class="fa fa-warning "></i> No result</td>
+                </tr>
+            </thead>
+            <tbody th:each="item , i :${items} ">
+                <tr>
+                    <th scope="row " th:text="${i.index +1} "></th>
+                    <td th:text="${item.item.itemId} ">
+                    </td>
+                    <td th:text="${item.item.itemName} "></td>
+                    <td th:text="${item.item.itemDescription} "></td>
+                    <td th:text="${item.item.buyingPrice} "></td>
+                    <td th:text="${item.item.sellingPrice} "></td>
+                    <td th:text="${item.item.categoryId} "></td>
+                    <td th:text="${item.item.quantity} "></td>
+                    <td> <img class="img-thumbnail " width="75px " th:src="@{${item.itemImage[0].getImagePath()}} " /></td>
+                    <td><span class="material-icons-outlined" type="button" data-toggle="modal" th:attr="data-target='#'+${item.item.itemId}+'EditModal'">edit</span></td>
+                    <td th:if="${is == 'admin'}"><span class="material-icons-outlined " th:attr="onclick=|removeItem(${item.item.itemId})| ">delete</span></td>
+                </tr>
+                <div class="modal fade" th:id="${item.item.itemId} + 'EditModal'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Item update</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                            </div>
+                            <div class="modal-body">
+                                <div th:replace="auth/admin/components/update/item :: item(itemx = ${item})"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </tbody>
+        </table>
+        <div class="modal fade" id="addItemModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add New Item</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                    </div>
+                    <div class="modal-body">
+                        <div th:replace="auth/admin/components/add/item :: item"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="custManageComp" style="margin-top: 50px;">
+        <div class="form-group pull-right" style="margin-left: 20px;">
+            <input type=" text " class="search4 form-control" placeholder="What are you looking for? ">
+        </div>
+        <table class="table table-bordered results4" id="customerTable" style="width: 90%; margin: 20px; ">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">customerId</th>
+                    <th scope="col">name</th>
+                    <th scope="col">username</th>
+                    <th scope="col">email</th>
+                    <th scope="col">phone</th>
+                    <th scope="col">age</th>
+                    <th scope="col">image</th>
+                    <th scope="col" th:if="${is == 'admin'}"></th>
+                </tr>
+                <tr class="warning no-result4">
+                    <td colspan="6 "><i class="fa fa-warning "></i> No result</td>
+                </tr>
+            </thead>
+            <tbody th:each="cust , i :${customers} ">
+                <tr>
+                    <th scope="row " th:text="${i.index +1} "></th>
+                    <td th:text="${cust.customerId} "></td>
+                    <td th:text="${cust.name} "></td>
+                    <td th:text="${cust.username} "></td>
+                    <td th:text="${cust.email} "></td>
+                    <td th:text="${cust.phoneNo} "></td>
+                    <td th:text="${cust.age} "></td>
+                    <td> <img class="img-thumbnail" width="75px" th:src="@{${cust.getImagePath()}} " /></td>
+                    <td th:if="${is == 'admin'}"><span class="material-icons-outlined " th:attr="onclick=|removeCust(${cust.customerId})| ">delete</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="manageEmpComp" style="margin-top: 50px; ">
+        <div class="row">
+            <div class="form-group pull-right col" style="margin-left: 20px;">
+                <input type=" text " class="search2 form-control" placeholder="What are you looking for? ">
+            </div>
+            <div class="col">
+                <center>
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addEmployeeModal">Add employee</button></center>
+            </div>
+        </div>
+        <table class="table table-bordered results2 " id="employeeTable" style="width: 90%; margin: 20px; ">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">employeeId</th>
+                    <th scope="col">name</th>
+                    <th scope="col">username</th>
+                    <th scope="col">email</th>
+                    <th scope="col">phone</th>
+                    <th scope="col">age</th>
+                    <th scope="col">address</th>
+                    <th scope="col">image</th>
+                    <th scope="col"></th>
+                </tr>
+                <tr class="warning no-result2">
+                    <td colspan="11"><i class="fa fa-warning"></i> No result</td>
+                </tr>
+            </thead>
+            <tbody th:each="emp , i :${employees} ">
+                <tr>
+                    <th scope="row " th:text="${i.index +1}"></th>
+                    <td th:text="${emp.empId}"></td>
+                    <td th:text="${emp.name} "></td>
+                    <td th:text="${emp.username} "></td>
+                    <td th:text="${emp.email} "></td>
+                    <td th:text="${emp.phoneNo} "></td>
+                    <td th:text="${emp.age} "></td>
+                    <td th:text="${emp.address} "></td>
+                    <td> <img class="img-thumbnail " width="75px " th:src="@{${emp.getImagePath()}} " /></td>
+                    <td><span class="material-icons-outlined " th:attr="onclick=|removeEmp(${emp.empId})| ">delete</span></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add employee</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                    </div>
+                    <div class="modal-body">
+                        <div th:replace="auth/admin/components/add/employee :: employee"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="ordersManageComp" style="margin-top: 40px;">
+        <div class="form-group pull-right" style="margin-left: 20px;">
+            <input type=" text " class="search3 form-control" placeholder="What are you looking for? ">
+        </div>
+        <table class="table table-bordered results3">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">orderId</th>
+                    <th scope="col">customerId</th>
+                    <th scope="col">order items</th>
+                    <th scope="col">Order placed Date</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Delivery Address</th>
+                    <th scope="col">Total</th>
+                    <th scope="col" th:if="${is == 'admin'}"></th>
+                </tr>
+                <tr class="warning no-result3">
+                    <td colspan="11"><i class="fa fa-warning"></i> No result</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="i,ind : ${allOrders}">
+                    <th scope="row" th:text="${ind.index+1}"></th>
+                    <td th:text="${i.order.orderId}"></td>
+                    <td th:text="${i.order.customerId}">customerId</td>
+                    <td>
+                        <p th:each="j : ${i.orderItems}">
+                            <span th:text="${j.item.itemName} + ' x '+${j.units} + ' @'+${j.price}"></span>
+                        </p>
+                    </td>
+                    <td th:text="${i.order.orderDate}"></td>
+                    <td>
+
+                        <div th:if="${i.order.orderStatus == -1}" class="progress">
+                            <div class="progress-bar bg-danger" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div th:if="${i.order.orderStatus == -1}" style="margin: 7px;">Order cancelled</div>
+                        <div th:if="${i.order.orderStatus == 0}" class="progress">
+                            <div class="progress-bar bg-warning" role="progressbar" style="width: 14.28%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div th:if="${i.order.orderStatus == 0}" style="margin: 7px;">Waiting for conformation
+                            <div>
+                                <button class="btn btn-danger" th:attr="onclick=|increaseStatus(${i.order.orderId})|">
+                                Mark placed
+                            </button>
+                            </div>
+                        </div>
+                        <div th:if="${i.order.orderStatus == 1}" class="progress">
+                            <div class="progress-bar bg-warning" role="progressbar" style="width: 28.57%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div th:if="${i.order.orderStatus == 1}" style="margin: 7px;">order placed
+                            <div>
+                                <button class="btn btn-danger" th:attr="onclick=|increaseStatus(${i.order.orderId})|">
+                                Mark Packed
+                            </button>
+                            </div>
+                        </div>
+                        <div th:if="${i.order.orderStatus == 2}" class="progress">
+                            <div class="progress-bar bg-warning" role="progressbar" style="width: 42.85%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div th:if="${i.order.orderStatus == 2}" style="margin: 7px;">Packed
+                            <div>
+                                <button class="btn btn-danger" th:attr="onclick=|increaseStatus(${i.order.orderId})|">
+                                Mark Shipped
+                            </button>
+                            </div>
+                        </div>
+                        <div th:if="${i.order.orderStatus == 3}" class="progress">
+                            <div class="progress-bar bg-info" role="progressbar" style="width: 57.14%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div th:if="${i.order.orderStatus == 3}" style="margin: 7px;">Shipped
+                            <div>
+                                <button class="btn btn-danger" th:attr="onclick=|increaseStatus(${i.order.orderId})|">
+                                Mark Arrived
+                            </button>
+                            </div>
+                        </div>
+                        <div th:if="${i.order.orderStatus == 4}" class="progress">
+                            <div class="progress-bar bg-info" role="progressbar" style="width: 71.42%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div th:if="${i.order.orderStatus == 4}" style="margin: 7px;">
+                            Arrived
+                            <div>
+                                <button class="btn btn-danger" th:attr="onclick=|increaseStatus(${i.order.orderId})|">
+                                Mark Delivering
+                            </button>
+                            </div>
+                        </div>
+                        <div th:if="${i.order.orderStatus == 5}" class="progress">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 85.71%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div th:if="${i.order.orderStatus == 5}" style="margin: 7px;">
+                            Out for delivery
+                            <div>
+                                <button class="btn btn-danger" th:attr="onclick=|increaseStatus(${i.order.orderId})|">
+                                Mark Delivered
+                            </button>
+                            </div>
+                        </div>
+                        <div th:if="${i.order.orderStatus == 6}" class="progress">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div th:if="${i.order.orderStatus == 6}" style="margin: 7px;">Delivered</div>
+
+                    </td>
+                    <td th:text="${i.order.deliveryAdd}"></td>
+                    <td th:text="${i.order.subtotal +80}"></td>
+                    <td th:if="${is == 'admin'}"><span class="material-icons-outlined " th:attr="onclick=|cancelOrder(${i.order.orderId})| ">delete</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="js/auth/admin/showAll.js "></script>
+</div>

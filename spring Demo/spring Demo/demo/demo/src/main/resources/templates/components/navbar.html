@@ -1,0 +1,92 @@
+<div th:fragment="navbar(is)">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
+    <link rel="stylesheet" href="/style/nav.css" />
+
+
+
+    <header class="header" id="header">
+        <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
+        <div th:if="${user !=null}" class="header_img"> <img th:src="@{${user.getImagePath()}}"> </div>
+    </header>
+    <div class="l-navbar" id="nav-bar" style="overflow-y:auto;">
+        <nav class="nav">
+            <div>
+                <a th:if="${is!='admin'}" type="button" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">Medicare</span> </a>
+                <div th:if="${is == 'customer'}" class="nav_list">
+                    <a style="color: white;cursor: pointer;" type="button" class="nav_link active" id="click1" onClick="show(1)"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Dashboard</span> </a>
+                    <a style="color: white;cursor: pointer;" type="button" id="click2" class="nav_link" onClick="show(2)"> <i class='bx bx-search nav_icon'></i> <span class="nav_name">search item</span> </a>
+
+                    <a style="color: white;cursor: pointer;" type="button" id="click3" class="nav_link" onClick="show(3)"> <i class='bx bx-cart nav_icon'></i> <span class="nav_name">cart</span> </a>
+                    <a style="color: white;cursor: pointer;" type="button" id="click4" class="nav_link" onClick="show(4)"> <i class='bx bx-box nav_icon'></i> <span class="nav_name">orders</span> </a>
+
+                    <a style="color: white;cursor: pointer;" type="button" id="click5" class="nav_link" onClick="show(5)"> <i class='bx bx-heart nav_icon'></i> <span class="nav_name">wishlist</span> </a>
+                    <a style="color: white;cursor: pointer;" type="button" id="click6" class="nav_link" onClick="show(6)"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">profile</span> </a>
+
+                </div>
+                <div th:if="${is == 'admin'}" class="nav_list">
+                    <a style="color: white;cursor: pointer;" type="button" class="nav_link active" id="click1" onClick="show(1)"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Dashboard</span> </a>
+                    <a style="color: white;cursor: pointer;" type="button" id="click2" class="nav_link" onClick="show(2)"> <i class='bx bx-search nav_icon'></i> <span class="nav_name">search item</span> </a>
+                    <a style="color: white;cursor: pointer;" type="button" id="click11" class="nav_link" onClick="show(11)"> <i class="iconify nav_icon" data-icon="clarity:employee-line"></i> <span class="nav_name">Manage employees</span> </a>
+                    <a style="color: white;cursor: pointer;" type="button" id="click12" class="nav_link" onClick="show(12)"> <i class='bx bx-category nav_icon'></i> <span class="nav_name">Manage categories</span> </a>
+                    <a style="color: white;cursor: pointer;" type="button" id="click13" class="nav_link" onClick="show(13)"> <i class="iconify nav_icon" data-icon="clarity:list-line"></i> <span class="nav_name">Manage orders</span> </a>
+                    <a style="color: white;cursor: pointer;" type="button" id="click14" class="nav_link" onClick="show(14)"> <i class="iconify nav_icon" data-icon="healthicons:medicines"></i> <span class="nav_name">Manage Items</span> </a>
+                    <a style="color: white;cursor: pointer;" type="button" id="click16" class="nav_link" onClick="show(16)"> <i class="iconify nav_icon" data-icon="akar-icons:people-group"></i> <span class="nav_name">customers</span> </a>
+
+                    <a style="color: white;cursor: pointer;" type="button" id="click17" class="nav_link" onClick="show(17)"> <i class="iconify nav_icon" data-icon="fluent:building-bank-toolbox-20-regular"></i> <span class="nav_name">Acocunts</span> </a>
+
+                    <a style="color: white;cursor: pointer;" type="button" id="click6" class="nav_link" onClick="show(6)"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">profile</span> </a>
+
+
+
+
+                </div>
+                <div th:if="${is == 'employee'}" class="nav_list">
+                    <a style="color: white;cursor: pointer;" type="button" class="nav_link active" id="click1" onClick="show(1)"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Dashboard</span> </a>
+                    <a style="color: white;cursor: pointer;" type="button" id="click2" class="nav_link" onClick="show(2)"> <i class='bx bx-search nav_icon'></i> <span class="nav_name">search item</span> </a>
+                    <a style="color: white;cursor: pointer;" type="button" id="click12" class="nav_link" onClick="show(12)"> <i class='bx bx-category nav_icon'></i> <span class="nav_name">Manage categories</span> </a>
+                    <a style="color: white;cursor: pointer;" type="button" id="click13" class="nav_link" onClick="show(13)"> <i class="iconify nav_icon" data-icon="clarity:list-line"></i> <span class="nav_name">Manage orders</span> </a>
+                    <a style="color: white;cursor: pointer;" type="button" id="click14" class="nav_link" onClick="show(14)"> <i class="iconify nav_icon" data-icon="healthicons:medicines"></i> <span class="nav_name">Manage Items</span> </a>
+                    <a style="color: white;cursor: pointer;" type="button" id="click16" class="nav_link" onClick="show(16)"> <i class="iconify nav_icon" data-icon="akar-icons:people-group"></i> <span class="nav_name">customers</span> </a>
+                    <a style="color: white;cursor: pointer;" type="button" id="click17" class="nav_link" onClick="show(17)"> <i class="iconify nav_icon" data-icon="fluent:building-bank-toolbox-20-regular"></i> <span class="nav_name">Acocunts</span> </a>
+                    <a style="color: white;cursor: pointer;" type="button" id="click6" class="nav_link" onClick="show(6)"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">profile</span> </a>
+                </div>
+                <div th:if="${is == 'none'}" class="nav_list">
+                    <a style="color: white;cursor: pointer;" type="button" class="nav_link active" id="click1" onClick="show(1)"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Dashboard</span> </a>
+                    <a style="color: white;cursor: pointer;" type="button" id="click2" class="nav_link" onClick="show(2)"> <i class='bx bx-search nav_icon'></i> <span class="nav_name">search item</span> </a>
+                </div>
+            </div>
+            <a th:if="${session.userId != null && is!='admin' && is!='employee'}" type="button" style="color: white;cursor: pointer;" id="logout" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">LogOut</span> </a>
+            <a th:if="${session.userId == null}" onClick="show(0)" type="button" style="color: white;cursor: pointer;" id="login" class="nav_link"> <i class='bx bx-log-in nav_icon'></i> <span class="nav_name">LogIn</span> </a>
+        </nav>
+    </div>
+    <!--Container Main start-->
+
+
+
+
+
+
+
+    <!--div class="text-area">
+        <input type="text" id="searchBox" autocomplete="off" spellcheck="false" />
+    </div>
+    <div class="btn">
+        <span class="material-icons-outlined" id="search-btn">search</span>
+    </div>
+
+
+    <div class="wishlist">
+        <span type="button" class="material-icons-outlined">favorite_border</span>
+    </div>
+
+
+    <div class="cart">
+        <span type="button" class="material-icons-outlined">shopping_cart</span>
+    </div-->
+
+
+
+    <script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
+
+</div>

@@ -1,0 +1,14 @@
+<div th:fragment="dashboard" id="dashboard">
+    <link rel="stylesheet" href="style/dashboard.css">
+    <section id="container2">
+        <div class="user-container">
+            <div class="card1" th:each="i: ${categories}" th:attr="onclick=|showItemsOfCategory(${i.catId})|" th:style="'background: url(\''+@{${i.getImagePath()}}+'\') no-repeat center 25% /cover;'">
+                <div class="user-content">
+                    <div class="bio">
+                        <h3 th:text="${i.category}"></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

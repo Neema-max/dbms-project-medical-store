@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="components/head :: heaad">
+</head>
+
+<body id="body-pd">
+    <div th:replace="components/navbar :: navbar(is='none')"></div>
+    <div class="height-100 bg-light" style="margin-top: 50px;">
+        <div th:replace="components/dashboard :: dashboard"></div>
+        <div th:if="${catrgoryItemShow != null}" th:replace="components/dashItemShow :: dashItemShow"></div>
+        <div th:replace="auth/logIn :: login"></div>
+        <div th:replace="components/search :: search"></div>
+
+        <div th:replace="components/items :: items"></div>
+        <div th:replace="auth/customer/register :: registerCust"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="./src/bootstrap-input-spinner.js"></script>
+    <script>
+        $("input[type='number']").inputSpinner()
+    </script>
+    <script src="js/components/dashboard.js"></script>
+    <script src="js/components/navbar.js"></script>
+    <script src="js/auth/logInOut.js"></script>
+    <script src="js/home.js"></script>
+</body>
+
+
+</html>

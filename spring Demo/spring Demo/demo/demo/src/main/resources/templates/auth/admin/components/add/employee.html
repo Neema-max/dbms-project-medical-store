@@ -1,0 +1,15 @@
+<div th:fragment="employee">
+    <form id="addEmployeeFrom">
+        <div class="form-group"><label>username</label><input class="form-control" type="text" name="uname" id="unameAddEmployee" placeholder="uname" required /></div>
+        <div class="form-group"><label>Creat Passowrd</label><input class="form-control" type="password" name="password" id="passAddEmployee" placeholder="password" required/></div>
+        <div class="form-group"><label>Email</label><input class="form-control" type="email" name="email" id="emailAddEmployee" placeholder="email" required/></div>
+        <div class="form-group"><label>Name</label><input class="form-control" type="text" name="name" id="nameAddEmployee" placeholder="name" required /></div>
+        <div class="form-group"><label>Phone</label><input class="form-control" style="width: 50%;" type="tel" name="phone" id="phoneAddEmployee" pattern="[0-9]{10}" placeholder="phone number" required/></div>
+        <div class="form-group"><label>Date of birth</label><input class="form-control" style="width: 50%;" type="date" name="dob" id="dobAddEmployee" placeholder="dob" required/></div>
+        <div class="form-group"><label>Address</label><input class="form-control" type="text" name="address" id="addressAddEmployee" placeholder="address" /></div>
+        <div class="form-group"><label>profile piture</label><input style="width: 50%;" class="form-control" type="file" name="image" accept="image/png, image/jpeg" /></div>
+        <div class="d-flex justify-content-center"><input type="submit" class="btn btn-primary"></div>
+    </form>
+    <p id="errorAddEmployee"></p>
+    <script src="js/auth/admin/components/add/employee.js"></script>
+</div>

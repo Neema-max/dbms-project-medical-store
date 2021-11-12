@@ -1,0 +1,21 @@
+<div th:fragment="category">
+    <!--form>
+        <input type="text" name="category" id="categoryCat">
+        <input type="file" name="image" accept="image/png, image/jpeg" />
+        <input type="submit">
+    </form-->
+
+    <form id="newCategoryForm">
+        <div class="form-group">
+            <label for="exampleInputEmail1">category</label>
+            <input type="text" name="category" id="categoryCat" class="form-control" placeholder="category">
+
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Image</label>
+            <input class="form-control" type="file" name="image" accept="image/png, image/jpeg" style="width: 70%;" />
+        </div>
+        <input type="submit" class="btn btn-primary">
+    </form>
+    <script src="js/auth/admin/components/add/category.js"></script>
+</div>

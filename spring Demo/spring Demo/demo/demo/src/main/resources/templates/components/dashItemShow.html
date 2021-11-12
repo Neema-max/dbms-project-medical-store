@@ -1,0 +1,57 @@
+<div th:fragment="dashItemShow" id="dashItemShow">
+    <div class="container1" style="background-color: whitesmoke;">
+        <!-- Normal Product -->
+        <div class="row">
+            <div class="col-6 col-md-4 mb-4 mt-4" style="width: 300px;margin: 35px;" th:each="i : ${catrgoryItemShow}">
+                <div class="product-card" th:if="${i.item.quantity > 0}">
+                    <div class="product-image">
+                        <img th:src="@{${i.itemImage[0].getImagePath()}} " />
+                    </div>
+                    <div class="product-detail">
+                        <div class="product-price-tag">
+                            <div class="product-name">
+                                <h4 class="m-0 p-0" th:attr="onclick=|showItem(${i.item.itemId})|" th:text="${#strings.abbreviate(i.item.itemName,15)}"></h4>
+                                <small class="text-muted m-0 p-0" th:text="${i.category}">Men's Sneakers</small>
+                            </div>
+                            <div class="product-price">
+                                <h5 th:text="₹+${i.item.sellingPrice}"></h5>
+                            </div>
+                        </div>
+                        <div class="product-size-color  mt-2 mb-2 " style="width:50%;margin-left: auto; 
+                        margin-right: 0;margin-top: auto;">
+                            <span><button class="btn" style="background-color: white;" th:attr="onclick=|decrease(${i.item.itemId}+'quantitydash')|">-</button></span><input type="number" value="1" min="1" th:max="${i.item.quantity}" name="quantity" th:id="${i.item.itemId}+quantitydash"
+                                style="border: none;width: 40px;text-align: center;">
+                            <span><button class="btn" style="background-color: white;" th:attr="onclick=|increase(${i.item.itemId}+'quantitydash')|">+</button></span>
+                        </div>
+                        <div class="cta row" style="height: 45px;">
+                            <button th:attr="onclick=|addToWishlist(${i.item.itemId})|" class="btn btn-danger col-6 btn-cart shadow-none" style="height: 50px;background-color:#ffffff;color:red;border: none;">Add To wishlist</button>
+                            <button th:attr="onclick=|addToCart(${i.item.itemId}, 'dash')|" class="btn btn-success col-6 btn-buy shadow-none" style="height: 50px;background-color: #4723D9;">Add to Card</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Out Of Order Product -->
+                <div class="product-card " th:if="${i.item.quantity<=0 } ">
+                    <div class="product-image ">
+                        <img th:src="@{${i.itemImage[0].getImagePath()}} " />
+
+                        <div class="out-of-order ">Out of Stock</div>
+                    </div>
+                    <div class="product-detail ">
+                        <div class="product-price-tag ">
+                            <div class="product-name ">
+                                <h4 class="m-0 p-0 " th:attr="onclick=|showItem(${i.item.itemId})|" th:text="${#strings.abbreviate(i.item.itemName,15)}"></h4>
+                                <small class="text-muted m-0 p-0 " th:text="${i.category}">Men's Boots</small>
+                            </div>
+                            <div class="product-price ">
+                                <h5 th:text="₹+${i.item.sellingPrice}">$750</h5>
+                            </div>
+                        </div>
+                        <div class="cta" style="height: 45px;text-align: center;padding-right: 35px;margin-top: 50px;">
+                            <button th:attr="onclick=|addToWishlist(${i.item.itemId})|" class="btn btn-danger shadow-none" style="height: 50px;background-color:#ffffff;color:red;border: none;">Add to wishlist</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

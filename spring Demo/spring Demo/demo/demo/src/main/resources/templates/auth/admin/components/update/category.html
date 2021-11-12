@@ -1,0 +1,10 @@
+<div th:fragment="category(cat)">
+    <form method="post" th:action="'/editCategory/'+${cat.catId}">
+        <div class="form-group">
+            <label>Category</label>
+            <input class="form-control" type="text" name="category" th:value="${cat.category}">
+
+        </div>
+        <input type="submit" class="btn btn-primary">
+    </form>
+</div>

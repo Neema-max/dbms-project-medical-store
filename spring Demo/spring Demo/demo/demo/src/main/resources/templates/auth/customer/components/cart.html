@@ -1,0 +1,61 @@
+<div th:fragment="cart" th:id="cartComp">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style/cart.css">
+    <div style="padding: 35px;">
+        <div th:if="${cart.size == 0}">oops cart is empty</div>
+        <div th:if="${cart.size != 0}" class="container padding-bottom-3x mb-1">
+            <!-- Alert-->
+            <!-- Shopping Cart-->
+            <div class="table-responsive shopping-cart">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th class="text-center">Quantity</th>
+                            <th class="text-center">Subtotal</th>
+                            <th class="text-center"><a class="btn btn-sm btn-outline-danger" onmouseover="this.style.color='white';" onmouseout="this.style.color='black';" onClick="clearCart()">Clear Cart</a></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="i : ${cart}">
+                            <td>
+                                <div class="product-item">
+                                    <a class="product-thumb" href="#"><img th:src="@{${i.itemImage[0].getImagePath()}}" alt="Product"></a>
+                                    <div class="product-info">
+                                        <h4 class="product-title">
+                                            <a type="button" th:attr="onclick=|showItem(${i.item.itemId})|" th:text="${i.item.itemName}"></a>
+                                        </h4><span><em>price pre unit : </em><span th:text="${i.item.sellingPrice}"></span></span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="count-input">
+                                    <span><button class="btn" style="background-color: white;padding: 0;margin: 0;width: 15px;padding-bottom: 4px;" th:attr="onclick=|decrease(${i.item.itemId}+'cart')|">-</button></span>
+                                    <input type="number" th:value="${i.units}" min="1" th:attr="onchange=|changes(${i.item.itemId})|" th:max="${i.item.quantity}" name="quantity" th:id="${i.item.itemId}+'cart'" style="border: none;text-align: center;margin-top:10px;padding: 0;width: 25px;">
+
+                                    <span><button class="btn" style="background-color: white;padding: 0;margin:0;width: 15px;padding-bottom: 4px;" th:attr="onclick=|increase(${i.item.itemId}+'cart')|">+</button></span>
+                                    <!--input th:id="${i.item.itemId}+cart" type="number" th:value=m in="1" th:max="${i.item.quantity}"-->
+                                </div>
+                            </td>
+                            <td class="text-center text-lg text-medium" th:text="${(i.item.sellingPrice) * (i.units)}"></td>
+                            <td class="text-center"><a class="remove-from-cart" type="button" th:attr="onclick=|removeFromCart(${i.item.itemId})| "><i class="fa fa-trash"></i></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="shopping-cart-footer">
+
+                <div class="column text-lg">Total: <span class="text-medium" th:text="${subtotal}"></span></div>
+            </div>
+            <div class="shopping-cart-footer">
+                <div class="column"><a class="btn btn-outline-secondary" href="#"><i class="icon-arrow-left"></i>&nbsp;Back to Shopping</a></div>
+                <div class="column"><a class="btn btn-primary" data-toast="" data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Your cart" data-toast-message="is updated successfully!" style="color: white" onClick="updateCart()">Update Cart</a>
+                    <a class="btn btn-success" type="button" th:attr="onclick=|checkout()|">Checkout</a>
+                </div>
+            </div>
+        </div>
+
+        <script src="js/auth/customer/components/cart.js"></script>
+        <script src="js/components/itemCard.js"></script>
+    </div>
+</div>
