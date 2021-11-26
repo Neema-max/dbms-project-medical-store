@@ -5,7 +5,7 @@ public class category {
     private String category;
     private String image;
     public String getImagePath() {
-        if (image.equals("#") || image.isEmpty() || image.isBlank()) return "/user-photos/category/default.png";
+        if (image.equals("#") || image.isEmpty()) return "/user-photos/category/default.png";
         return "/user-photos/category/" + catId + "/" + image;
     }
     /**
