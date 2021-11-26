@@ -5,8 +5,8 @@ public class itemImage {
     private String image;
     
     public String getImagePath() {
-        if (image.equals("#") || image.isEmpty() ) return "/user-photos/items/default.jfif";
-        return "/user-photos/items/" + itemId + "/" + image;
+        if (image.equals("#") || image.isEmpty() ) return "https://mybucket-user-photos.s3.ap-south-1.amazonaws.com/user-photos/items/default.jfif";
+        return "https://mybucket-user-photos.s3.ap-south-1.amazonaws.com/user-photos/items/" + itemId + "/" + image;
     }
     
 
