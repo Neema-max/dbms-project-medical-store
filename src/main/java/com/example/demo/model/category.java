@@ -5,8 +5,8 @@ public class category {
     private String category;
     private String image;
     public String getImagePath() {
-        if (image.equals("#") || image.isEmpty()) return "/user-photos/category/default.png";
-        return "/user-photos/category/" + catId + "/" + image;
+        if (image.equals("#") || image.isEmpty()) return "https://mybucket-user-photos.s3.ap-south-1.amazonaws.com/user-photos/category/default.png";
+        return "https://mybucket-user-photos.s3.ap-south-1.amazonaws.com/user-photos/category/" + catId + "/" + image;
     }
     /**
      * @return int return the catId
