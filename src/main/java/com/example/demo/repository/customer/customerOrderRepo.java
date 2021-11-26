@@ -19,7 +19,7 @@ public class customerOrderRepo {
         template.update(sql, o.getOrderId() , o.getCustomerId() , o.getOrderStatus(),o.getDeliveryAdd(),o.getOrderDate(),o.getSubtotal());
     }
     public void saveoti(orderToItems oti){
-        String sql = "insert into orderToitems values(?,?,?,?)";
+        String sql = "insert into ordertoitems values(?,?,?,?)";
         template.update(sql, oti.getOrderId() , oti.getItemId() , oti.getUnits(), oti.getPrice());
     }
     public List<order> getOrders(int cid){
@@ -27,7 +27,7 @@ public class customerOrderRepo {
         return  template.query(sql,new BeanPropertyRowMapper<>(order.class),cid);
     }
     public List<orderToItems> getItemsByOrderId(int oid){
-        String sql = "select * from orderToItems where orderId = ?";
+        String sql = "select * from ordertoitems where orderId = ?";
         return  template.query(sql,new BeanPropertyRowMapper<>(orderToItems.class),oid);
     }
     public int lastOrderId(){

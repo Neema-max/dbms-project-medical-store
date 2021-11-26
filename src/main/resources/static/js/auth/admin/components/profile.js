@@ -1,5 +1,4 @@
 function submitEditProfileForm() {
-    alert("hanalfsnaln");
     var fd = new FormData(document.getElementById("editProfileForm"));
     $.ajax({
         type: "POST",
@@ -9,7 +8,6 @@ function submitEditProfileForm() {
         contentType: false,
         processData: false,
         success: function(data) {
-            alert("hey");
             if (data.result == "success") {
                 window.location.reload();
             } else {

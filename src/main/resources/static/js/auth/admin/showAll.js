@@ -1,5 +1,4 @@
 function remove(x, id) {
-    alert("hii");
     $.ajax({
         type: "POST",
         url: "remove",

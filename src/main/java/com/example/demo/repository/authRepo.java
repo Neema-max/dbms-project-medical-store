@@ -211,7 +211,7 @@ public class authRepo {
         );
     }
     public List<itemImage> getItemImage(int itemId){
-        String sql = "select * from itemImage where itemId = ?";
+        String sql = "select * from itemimage where itemId = ?";
         return template.query(sql,new BeanPropertyRowMapper<>(itemImage.class),itemId);
     }
     public List<employee> getAllEmployee(){

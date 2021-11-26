@@ -11,7 +11,7 @@ public class itemImageRepo {
     @Autowired
     private JdbcTemplate template;
     public void save(itemImage i){
-        String  sql = "insert into itemImage values(?,?)";
+        String  sql = "insert into itemimage values(?,?)";
         template.update(
             sql,
             i.getItemId(),
