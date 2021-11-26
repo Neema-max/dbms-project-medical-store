@@ -15,7 +15,7 @@ public class employee {
     public String getImagePath() {
         System.out.println(empId);
         if( image != null ){
-            if (image.equals("#") || image.isEmpty() || image.isBlank()) {
+            if (image.equals("#") || image.isEmpty() ) {
                 return "/user-photos/employee/default.jfif";
             }   
         }
