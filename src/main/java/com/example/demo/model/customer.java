@@ -17,9 +17,9 @@ public class customer {
         System.out.println("aa to raha");
         System.out.println(image);
         if (image.equals("#") || image.isEmpty()  ) {
-            return "/user-photos/customer/default.jfif";
+            return "https://mybucket-user-photos.s3.ap-south-1.amazonaws.com/user-photos/customer/default.jfif";
         }   
-        return "/user-photos/customer/" + customerId + "/" + image;
+        return "https://mybucket-user-photos.s3.ap-south-1.amazonaws.com/user-photos/customer/" + customerId + "/" + image;
     }
     /**
      * @return int return the customerId
