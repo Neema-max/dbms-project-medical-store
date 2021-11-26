@@ -13,7 +13,7 @@ public class admin {
     private int age;
     private String image;
     public String getImagePath() {
-        if (image.equals("#") || image.isEmpty() || image.isBlank()) return "/user-photos/admin/default.jfif";
+        if (image.equals("#") || image.isEmpty() ) return "/user-photos/admin/default.jfif";
         return "/user-photos/admin/" + adminId + "/" + image;
     }
     /**
