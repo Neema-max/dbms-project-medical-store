@@ -13,8 +13,8 @@ public class admin {
     private int age;
     private String image;
     public String getImagePath() {
-        if (image.equals("#") || image.isEmpty() ) return "/user-photos/admin/default.jfif";
-        return "/user-photos/admin/" + adminId + "/" + image;
+        if (image.equals("#") || image.isEmpty() ) return "https://mybucket-user-photos.s3.ap-south-1.amazonaws.com/user-photos/admin/default.jfif";
+        return "https://mybucket-user-photos.s3.ap-south-1.amazonaws.com/user-photos/admin/" + adminId + "/" + image;
     }
     /**
      * @return int return the adminId
