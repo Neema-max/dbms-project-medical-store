@@ -16,10 +16,10 @@ public class employee {
         System.out.println(empId);
         if( image != null ){
             if (image.equals("#") || image.isEmpty() ) {
-                return "/user-photos/employee/default.jfif";
+                return "https://mybucket-user-photos.s3.ap-south-1.amazonaws.com/user-photos/employee/default.jfif";
             }   
         }
-        return "/user-photos/employee/" + empId + "/" + image;
+        return "https://mybucket-user-photos.s3.ap-south-1.amazonaws.com/user-photos/employee/" + empId + "/" + image;
     }
     public int getEmpId() {
         return empId;
