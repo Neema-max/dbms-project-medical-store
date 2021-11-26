@@ -16,7 +16,7 @@ public class customer {
     public String getImagePath() {
         System.out.println("aa to raha");
         System.out.println(image);
-        if (image.equals("#") || image.isEmpty() || image.isBlank() ) {
+        if (image.equals("#") || image.isEmpty()  ) {
             return "/user-photos/customer/default.jfif";
         }   
         return "/user-photos/customer/" + customerId + "/" + image;
