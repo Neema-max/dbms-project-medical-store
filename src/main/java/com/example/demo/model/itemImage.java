@@ -5,7 +5,7 @@ public class itemImage {
     private String image;
     
     public String getImagePath() {
-        if (image.equals("#") || image.isEmpty() || image.isBlank()) return "/user-photos/items/default.jfif";
+        if (image.equals("#") || image.isEmpty() ) return "/user-photos/items/default.jfif";
         return "/user-photos/items/" + itemId + "/" + image;
     }
     
