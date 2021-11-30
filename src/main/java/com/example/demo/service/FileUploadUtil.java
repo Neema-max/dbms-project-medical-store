@@ -34,7 +34,9 @@ public class FileUploadUtil {
         System.out.println("------------");
         System.out.println("------------");
         System.out.println("------------");
-        AWSCredentials credentials = new BasicAWSCredentials("AKIAXS6LMX27DFGJZVG7", "SBbWrIHrJzlVxjzuFn+ib1ofKUg1DB6jWlgzdhdW");
+        //AKIAXS6LMX27EQEVCCHQ
+        //7sF7ZTh0n8Mk/DozDYVfvBf8L3JYaH+F2KVY10d6
+        AWSCredentials credentials = new BasicAWSCredentials("AKIAXS6LMX27EQEVCCHQ", "7sF7ZTh0n8Mk/DozDYVfvBf8L3JYaH+F2KVY10d6");
         AmazonS3 s3client = new AmazonS3Client(credentials);
         System.out.println(s3client.getBucketAcl("mybucket-user-photos"));
         System.out.println("------------");
